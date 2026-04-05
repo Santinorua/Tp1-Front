@@ -1,0 +1,15 @@
+---
+    const { text } = Astro.props;
+---
+
+<div class="p-4">
+    <div class="w-3/5 p-4 rounded-3xl">
+        <p>{text}</p>
+    </div>
+</div>
+
+<style>
+    div > div {
+        background-color: #f0f0f0;
+    }
+</style>
