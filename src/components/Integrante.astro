@@ -1,0 +1,11 @@
+---
+    import InstagramIcon from '/public/instagram.svg';
+    const { nombre, ig } = Astro.props;
+---
+
+<h1 class="text-lg font-bold">{nombre}</h1>
+<div class="flex">
+    <a class="hover:opacity-50" href={ig} target="_blank">
+        <InstagramIcon width="24" />
+    </a>
+</div>
