@@ -1,1 +1,68 @@
-<div class="w-full"></div>
+---
+    let client_id = '4f83746aee634f8a8390b15dc09f3a9b';
+    let client_secret = 'b0b1ed091e0d4a8fa750dc470081ebc7';
+
+    let authOptions = {
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+        'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
+    },
+    form: {
+        grant_type: 'client_credentials'
+    },
+    json: true
+    };
+
+    const tokenResponse = await fetch(authOptions.url, {
+        method: 'POST',
+        headers: authOptions.headers,
+        body: new URLSearchParams(authOptions.form)
+    });
+    const token = await tokenResponse.json();
+    const spotifyAlbumsResponse = await fetch('https://api.spotify.com/v1/artists/7An4yvF7hDYDolN4m5zKBp/albums?limit=10', {
+        headers: {
+            Authorization: 'Bearer ' + token.access_token
+        } 
+    });
+    const spotifyAlbums = await spotifyAlbumsResponse.json();
+    const spotifyAlbumsResponse2 = await fetch('https://api.spotify.com/v1/artists/7An4yvF7hDYDolN4m5zKBp/albums?limit=10&offset=10', {
+        headers: {
+            Authorization: 'Bearer ' + token.access_token
+        } 
+    });
+    const spotifyAlbums2 = await spotifyAlbumsResponse2.json();
+    const allAlbums = [...spotifyAlbums.items, ...spotifyAlbums2.items];
+---
+
+<div class="w-full flex flex-1 overflow-hidden p-4">
+    <ul class="space-x-5 albumList">
+        {[...allAlbums, ...allAlbums].map((album) => {
+            return (
+            <li class="w-1flex-shrink-0 " style="width: 200px;">
+                <div class="p-1">
+                    <img src={album.images[0].url} alt={album.name} width="100%">
+                    <p class="text-center">{album.name}</p>
+                </div>
+                
+            </li>
+        )})}
+    </ul>
+</div>
+
+<style>
+    .albumList {
+        display: flex;
+        width: max-content;
+        animation: infinite-scroll 20s infinite linear;
+    }
+
+    @keyframes infinite-scroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+    
+</style>

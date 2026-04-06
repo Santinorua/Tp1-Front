@@ -2,18 +2,17 @@
     const { text } = Astro.props;
 ---
 
-<div class="w-3/5 p-4">
-    <div class="p-4 rounded-3xl border-2 select-text cursor-default border-solid hover:scale-101 transition-transform duration-300">
-        <p>{text}</p>
-    </div>
+<div class="p-4 rounded-3xl border-2 select-text cursor-default border-solid hover:scale-101 transition-transform duration-300">
+    <p>{text}</p>
 </div>
 
+
 <style>
-    div > div {
+    div {
         background-color: #fbfbfb;
         border-color: #f0f0f0;
     }
-    div > div:hover {
+    div:hover {
         background-color: #f0f0f0;
     }
 </style>
