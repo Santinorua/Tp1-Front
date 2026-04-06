@@ -1,6 +1,6 @@
 ---
-    let client_id = '4f83746aee634f8a8390b15dc09f3a9b';
-    let client_secret = 'b0b1ed091e0d4a8fa750dc470081ebc7';
+    let client_id = 'd8cb4b8711514d3ba8604a82dfbc8add';
+    let client_secret = 'b0d3630766c741b2b749bdc4f4f12338';
 
     let authOptions = {
     url: 'https://accounts.spotify.com/api/token',
@@ -31,18 +31,20 @@
         } 
     });
     const spotifyAlbums2 = await spotifyAlbumsResponse2.json();
-    const allAlbums = [...spotifyAlbums.items, ...spotifyAlbums2.items];
+    let allAlbums = [...spotifyAlbums.items, ...spotifyAlbums2.items];
+    allAlbums = allAlbums.reverse();
 ---
 
 <div class="w-full flex flex-1 overflow-hidden p-4">
     <ul class="space-x-5 albumList">
         {[...allAlbums, ...allAlbums].map((album) => {
             return (
-            <a href={album.external_urls.spotify}>
-                <li class="w-1flex-shrink-0 " style="width: 200px;">
-                    <div class="p-1">
+            <a href={album.external_urls.spotify} target="_blank">
+                <li class="w-1 flex-shrink-0" style="width: 200px;">
+                    <div class="p-3 rounded-lg album border-2 border-solid hover:scale-101 transition-transform duration-300">
                         <img src={album.images[0].url} alt={album.name} width="100%">
-                        <p class="text-center">{album.name}</p>
+                        <p class="text-center">{new Date(album.release_date).getFullYear()}</p>
+                        <p class="text-center text-gray-800">{album.name}</p>
                     </div>
                     
                 </li>
@@ -53,6 +55,13 @@
 </div>
 
 <style>
+    .album {
+        background-color: #fbfbfb;
+        border-color: #f0f0f0;
+    }
+    .album:hover {
+        background-color: #f0f0f0;
+    }
     .albumList {
         display: flex;
         width: max-content;
