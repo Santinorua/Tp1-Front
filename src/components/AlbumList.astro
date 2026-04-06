@@ -41,7 +41,7 @@
             return (
             <a href={album.external_urls.spotify} target="_blank">
                 <li class="w-1 flex-shrink-0" style="width: 200px;">
-                    <div class="p-3 rounded-lg album border-2 border-solid hover:scale-101 transition-transform duration-300">
+                    <div class="p-3 rounded-lg album border-2 border-solid hover:scale-102 transition-transform duration-300">
                         <img src={album.images[0].url} alt={album.name} width="100%">
                         <p class="text-center">{new Date(album.release_date).getFullYear()}</p>
                         <p class="text-center text-gray-800">{album.name}</p>
@@ -59,13 +59,19 @@
         background-color: #fbfbfb;
         border-color: #f0f0f0;
     }
+
     .album:hover {
         background-color: #f0f0f0;
     }
+
     .albumList {
         display: flex;
         width: max-content;
         animation: infinite-scroll 20s infinite linear;
+    }
+
+    .albumList:hover {
+        animation-play-state: paused;
     }
 
     @keyframes infinite-scroll {
