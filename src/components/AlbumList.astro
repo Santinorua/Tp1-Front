@@ -38,13 +38,16 @@
     <ul class="space-x-5 albumList">
         {[...allAlbums, ...allAlbums].map((album) => {
             return (
-            <li class="w-1flex-shrink-0 " style="width: 200px;">
-                <div class="p-1">
-                    <img src={album.images[0].url} alt={album.name} width="100%">
-                    <p class="text-center">{album.name}</p>
-                </div>
+            <a href={album.external_urls.spotify}>
+                <li class="w-1flex-shrink-0 " style="width: 200px;">
+                    <div class="p-1">
+                        <img src={album.images[0].url} alt={album.name} width="100%">
+                        <p class="text-center">{album.name}</p>
+                    </div>
+                    
+                </li>
+            </a>
                 
-            </li>
         )})}
     </ul>
 </div>
